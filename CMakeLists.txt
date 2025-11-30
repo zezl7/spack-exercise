@@ -1,17 +1,24 @@
 cmake_minimum_required(VERSION "3.12")
 
-project("spackexample" VERSION 0.3.0)
+project("spackexample" VERSION 0.3.1)
 
-find_package(Boost
-  1.65.1
-  REQUIRED
-  filesystem
-  )
+option(BOOST "Enable boost support" ON)
+option(YAML "Enable yaml support" ON)
 
-find_package(yaml-cpp
-  0.7.0
-  REQUIRED
-  )
+if(BOOST)
+  find_package(Boost
+    1.65.1
+    REQUIRED
+    filesystem
+    )
+endif()
+
+if(YAML)
+  find_package(yaml-cpp
+    0.7.0
+    REQUIRED
+    )
+endif()
 
 add_library(spackexamplelib filesystem/filesystem.cpp flatset/flatset.cpp yamlParser/yamlParser.cpp)
 
